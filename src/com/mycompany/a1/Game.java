@@ -38,7 +38,6 @@ public class Game extends Form {
 					gw.addSpaceStation();
 					break;
 				case 's':
-					System.out.println("You added a ship");
 					gw.addShip();
 					break;
 				case 'i':

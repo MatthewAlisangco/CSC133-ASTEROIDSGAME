@@ -29,22 +29,23 @@ public class GameWorld {
 	}
 
 	public void addShip() {
+		Ship playership = Ship.getShip();
 		
 		for (int i = 0; i < spaceObjects.size(); i++) {
-				if (spaceObjects.elementAt(i) instanceof Ship ) {
-					Ship shpObj = (Ship) spaceObjects.elementAt(i);
-					System.out.println("a current ship exists: " + shpObj.toString());
-					break;
+			if (spaceObjects.elementAt(i) instanceof MoveableObject) {
+				if ((!spaceObjects.contains(playership))) {
+					spaceObjects.add(playership);
 				}
 				else {
-					spaceObjects.add(new Ship());
+					System.out.println("ship exists");
+					playership.toString();
 					break;
 				}
-							
-		}	
-		System.out.println("ship created");
-	}
-
+			}
+		}
+			
+		}
+		
 	public void increaseShipSpeed() {
 		for (int i = 0; i < spaceObjects.size(); i++) {
 			if (spaceObjects.elementAt(i) instanceof MoveableObject) {

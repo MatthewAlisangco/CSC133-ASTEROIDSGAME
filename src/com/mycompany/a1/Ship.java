@@ -4,13 +4,41 @@ import com.codename1.charts.util.ColorUtil;
 
 public class Ship extends MoveableObject {
 	private int missilecount = 10;
+	private static Ship tiefighter;
 
-	public Ship() {
+	
+	private Ship() {
 		super.setLocation(512, 384);
 		super.setSpeed(0);
 		super.setDirection(0);
 		super.setColor(0, 255, 10);
 	}
+	
+
+	public static Ship getShip () {
+		if (tiefighter == null) {
+			tiefighter = new Ship();
+			System.out.println("Ship created");
+		}
+		return tiefighter;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public Ship(int x, int y, int speed, int direction, int r, int g, int b) {
 		super.setLocation(x, y);
