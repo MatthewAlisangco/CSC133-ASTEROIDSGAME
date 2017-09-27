@@ -64,10 +64,18 @@ public class Game extends Form {
 					gw.jumpHyperspace();
 					break;
 				case 'n':
+					gw.rearmFromStation();
 					break;
 				case 'k':
+					break;
 				case 'c':
+					System.out.println("Ship has crashed into Asteroid");
+					gw.shipCollideWithAsteroid();
+					break;
 				case 'x':
+					//System.out.println("two asteroids collide");
+					gw.asteroidCollisions();
+					break;
 				case 't':
 					gw.tickTimer();
 					break;
@@ -78,7 +86,11 @@ public class Game extends Form {
 					gw.printCurrentStateOfGame();
 					break;
 				case 'q':
-					break;	
+					System.out.println("are you sure you want to quit? press y to confirm");
+					break;
+				case 'y':
+					System.exit(0);
+					break;
 				default:
 					System.out.println("invalid key");
 				}

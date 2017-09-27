@@ -24,21 +24,6 @@ public class Ship extends MoveableObject {
 		
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public Ship(int x, int y, int speed, int direction, int r, int g, int b) {
 		super.setLocation(x, y);
@@ -56,6 +41,11 @@ public class Ship extends MoveableObject {
 	}
 
 	public void reload() {
+		if(this.missilecount == 10){
+			System.out.println("missiles are full" + this.missilecount);
+		}
+		else
+			missilecount += 1;
 
 	}
 
@@ -64,7 +54,7 @@ public class Ship extends MoveableObject {
 	}
 
 	public void setMissiles(int inMissiles) {
-		this.missilecount = inMissiles;
+		this.missilecount += inMissiles;
 	}
 
 	public int getMissiles() {

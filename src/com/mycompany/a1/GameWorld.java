@@ -5,12 +5,9 @@ import java.util.Vector;
 import com.codename1.charts.util.ColorUtil;
 
 public class GameWorld {
-	private int playerscore;
-	private int clock;
-	private int lives;
+	private int playerscore, clock, lives;
 	private Vector<GameObject> spaceObjects;
-	private Missiles m;
-
+	
 	public void init() {
 		playerscore = 0;
 		clock = 0;
@@ -26,6 +23,20 @@ public class GameWorld {
 		SpaceStation deathstar = SpaceStation.getSpaceStation();
 		deathstar.setBlinkrate(2);
 		spaceObjects.add(deathstar);
+		
+		for (int i = 0; i < spaceObjects.size(); i++) {
+			if (spaceObjects.elementAt(i) instanceof FixedObject) {
+				if ((!spaceObjects.contains(deathstar))) {
+					spaceObjects.add(deathstar);
+					break;
+				}
+				else {
+					System.out.println("space station exists");
+					deathstar.toString();
+					break;
+				}
+			}
+		}
 	}
 
 	public void addShip() {
@@ -35,6 +46,7 @@ public class GameWorld {
 			if (spaceObjects.elementAt(i) instanceof MoveableObject) {
 				if ((!spaceObjects.contains(playership))) {
 					spaceObjects.add(playership);
+					break;
 				}
 				else {
 					System.out.println("ship exists");
@@ -102,9 +114,9 @@ public class GameWorld {
 					shpObj.incSpeed();
 					if (shpObj.getMissiles() > 0)
 						System.out.println("Firing");
-					spaceObjects
-							.add(new Missiles(shpObj.getDirection(), shpObj.getSpeed(), shpObj.getX(), shpObj.getY()));
+					spaceObjects.add(new Missiles(shpObj.getDirection(), shpObj.getSpeed(), shpObj.getX(), shpObj.getY()));
 					shpObj.fire();
+			
 					if (shpObj.getMissiles() == 0) // accidently removes ship
 						System.out.println("you are out of missiles, reload");
 				}
@@ -148,7 +160,6 @@ public class GameWorld {
 	public void printMap() {
 		Iterator<GameObject> itr = spaceObjects.iterator();
 		while (itr.hasNext()) {
-			// Object Element = itr.next();
 			System.out.println(itr.next().toString());
 		}
 	}
@@ -173,10 +184,57 @@ public class GameWorld {
 				if (spaceObjects.elementAt(i) instanceof Ship) {
 					Ship shpObj = (Ship) spaceObjects.elementAt(i);
 					shpObj.setLocation(512, 384);
-					System.out.println("Jumped to hyperspaxce " + shpObj.toString());
+					System.out.println("Jumped to hyperspace " + shpObj.toString());
 				}
 			}
 		}
+	}
+	
+	
+	public void rearmFromStation(){
+		for (int i = 0; i < spaceObjects.size(); i++)
+		if (spaceObjects.elementAt(i) instanceof MoveableObject) {
+			if (spaceObjects.elementAt(i) instanceof Ship) {
+				Ship shpObj = (Ship) spaceObjects.elementAt(i);
+				shpObj.reload();
+				System.out.println("Rearming: " + shpObj.toString());
+			}
+		}
+		
+	}
+
+	public void shipCollideWithAsteroid(){
+		for (int i = 0; i < spaceObjects.size(); i++) {
+			if (spaceObjects.elementAt(i) instanceof MoveableObject) {
+				if (spaceObjects.elementAt(i) instanceof Ship) {
+					spaceObjects.removeElementAt(i);
+					decrementlife();
+				}
+				
+				if (spaceObjects.elementAt(i) instanceof Asteroids) {
+					spaceObjects.removeElementAt(i);
+				}
+			}
+		}
+	}
+	
+
+	public void asteroidCollisions(){
+		for (int i = 0; i < spaceObjects.size(); i++) {
+			while(spaceObjects.elementAt(i) instanceof Asteroids) {
+				spaceObjects.removeElement(i);
+				System.out.println("two Asteroids collide");
+			}
+		}
+		
+	}
+	
+	
+	public void decrementlife(){
+		if(lives <=0){
+			lives = 0;
+		}
+		lives--;
 	}
 
 }
