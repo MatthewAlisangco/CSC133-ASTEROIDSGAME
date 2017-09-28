@@ -117,7 +117,7 @@ public class GameWorld {
 					spaceObjects.add(new Missiles(shpObj.getDirection(), shpObj.getSpeed(), shpObj.getX(), shpObj.getY()));
 					shpObj.fire();
 			
-					if (shpObj.getMissiles() == 0) // accidently removes ship
+					if (shpObj.getMissiles() == 0) 
 						System.out.println("you are out of missiles, reload");
 				}
 			}
@@ -149,8 +149,10 @@ public class GameWorld {
 				if (mObj.getFuelLevel() > 0) {
 					mObj.move();
 					System.out.println("the missile is moving" + mObj.toString());
+				
 				}
 				if (mObj.getFuelLevel() == 0)
+					System.out.println("fuellevel is " + mObj.getFuelLevel());
 					System.out.println("Missile ran out of fuel" + mObj.toString());
 				spaceObjects.removeElementAt(i);
 			}
@@ -229,6 +231,19 @@ public class GameWorld {
 		
 	}
 	
+	public void missileToAsteroidCollision(){
+		for (int i = 0; i < spaceObjects.size(); i++) {
+			if (spaceObjects.elementAt(i) instanceof MoveableObject) {
+				if (spaceObjects.elementAt(i) instanceof Missiles) {
+					spaceObjects.removeElementAt(i);
+				}
+				
+				if (spaceObjects.elementAt(i) instanceof Asteroids) {
+					spaceObjects.removeElementAt(i);
+				}
+			}
+		}
+	}
 	
 	public void decrementlife(){
 		if(lives <=0){

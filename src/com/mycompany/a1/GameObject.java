@@ -10,9 +10,6 @@ public abstract class GameObject {
 	private float y;
 	static int color;
 	ColorUtil colorutil = new ColorUtil();
-	private static int r;
-	private static int g;
-	private static int b;
 
 	public void setX(float inX) {
 		this.x = inX;
@@ -23,10 +20,7 @@ public abstract class GameObject {
 	}
 
 	public void setColor(int inr, int ing, int inb) {
-		this.r = inr;
-		this.g = ing;
-		this.b = inb;
-		colorutil.rgb(inr, ing, inb);
+		color = colorutil.rgb(inr, ing, inb);
 
 	}
 
@@ -47,12 +41,8 @@ public abstract class GameObject {
 	// return this.location;
 	// }
 
-	public int getColor() {
-		return this.color;
-	}
-
 	public String toString() {
-		return "loc=" + this.x + "," + this.y + " color=[" + this.r + "," + this.g + "," + this.b + "] ";
+		return "loc=" + this.x + "," + this.y + " color=[" + colorutil.red(color)+ "," + colorutil.green(color) + "," + colorutil.blue(color) + "] ";
 	}
 
 }

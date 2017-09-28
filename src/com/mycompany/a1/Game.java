@@ -64,16 +64,19 @@ public class Game extends Form {
 					gw.jumpHyperspace();
 					break;
 				case 'n':
+					System.out.println("rearming from station");
 					gw.rearmFromStation();
 					break;
 				case 'k':
+					System.out.println("missile hits asteroid");
+					gw.missileToAsteroidCollision();
 					break;
 				case 'c':
 					System.out.println("Ship has crashed into Asteroid");
 					gw.shipCollideWithAsteroid();
 					break;
 				case 'x':
-					//System.out.println("two asteroids collide");
+					System.out.println("two asteroids collide");
 					gw.asteroidCollisions();
 					break;
 				case 't':
